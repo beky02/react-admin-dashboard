@@ -28,13 +28,13 @@ class AdminSidebar extends React.Component {
                     <Menu.Item key="4"><Link to='/admin/edit2'>Edit Entries 2</Link></Menu.Item>
                 </SubMenu>
 
-                <Menu.Item key="9"><Link to='/admin/send'><Icon type="dashboard"></Icon>Dashboard</Link></Menu.Item>
-                <Menu.Item key="1"><Link to='/admin/send'><Icon type="message"></Icon>Send MT 6096</Link></Menu.Item>
+                <Menu.Item key="9"><Link to='/admin/dashboard'><Icon type="appstore-o"></Icon>Dashboard</Link></Menu.Item>
+                <Menu.Item key="1"><Link to='/admin/sendContet'><Icon type="message"></Icon>Send MT 6096</Link></Menu.Item>
                 <Menu.Item key="2"><Link to='/admin/search'><Icon type="search"></Icon>Search</Link></Menu.Item>
-                <Menu.Item key="5"><Link to='/admin/users'><Icon type="user"></Icon>No of users</Link></Menu.Item>
-                <Menu.Item key="6"><Link to='/admin/content'><Icon type="enter"></Icon>Enter Content</Link></Menu.Item>
+                <Menu.Item key="5"><Link to='/admin/allUsers'><Icon type="user"></Icon>No of users</Link></Menu.Item>
+                <Menu.Item key="6"><Link to='/admin/enterContent'><Icon type="enter"></Icon>Enter Content</Link></Menu.Item>
                 <Menu.Item key="7"><Link to='/admin/delete'><Icon type="delete"></Icon>Delete</Link></Menu.Item>
-                <Menu.Item key="8"><Link to='/admin/send'><Icon type="calendar"></Icon>Calendar</Link></Menu.Item>
+                <Menu.Item key="8"><Link to='/admin/calendar'><Icon type="calendar"></Icon>Calendar</Link></Menu.Item>
             </Menu>
         );
     }

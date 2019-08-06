@@ -5,6 +5,9 @@ import axios from 'axios';
 import Sidebar from '../../Component/sidebar/index';
 import Header from '../../Component/Header';
 import Flex from '../../Component/Flex';
+import SendContent from './SendContent';
+import EnterContent from './EnterContent';
+import AllUser from './AllUsers';
 
 const Wrapper = styled(Flex)`
     width: 100%;
@@ -22,10 +25,7 @@ const RightWrapper = styled.div`
 `;
 
 const Content = styled(Flex)`
-    background-color: #f4f5f6;
-    padding-top: 30px;
     padding-bottom: 30px;
-    padding-left: 15px;
     padding-right: 15px;
 `;
 
@@ -42,7 +42,6 @@ const NotificationContent = styled.div`
 
 const MainWrapper = styled.div`
     flex-grow: 1;
-    padding-right: 10px;
 `;
 
 const NotificationP = styled.p`
@@ -71,6 +70,15 @@ class AdminDashboard extends React.Component {
                 <Sidebar type="admin" showSidebar={showSidebar} name="Kalid" last=" " />
                 <RightWrapper left={showSidebar ? '250px' : '0px'} width={showSidebar && 250}>
                     <Header type="admin" toggleSidebar={this.toggleSidebar} name="kalid"></Header>
+                    <Content>
+                        <MainWrapper>
+                            <Switch>
+                            <Route exact path='/admin' component={SendContent} />
+                            <Route exact path='/admin/enterContent' component={EnterContent} />
+                            <Route exact path='/admin/allUsers' component={AllUser} />
+                            </Switch>
+                        </MainWrapper>
+                    </Content>
                 </RightWrapper>
 
             </Wrapper>
