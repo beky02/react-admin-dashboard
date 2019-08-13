@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 `;
 const Headers = styled.div`
     background-color: #303542;
-    height: 18%;
+    height: 24%;
     display: flex;
     justify-content: space-around;
     align-content: start;
@@ -47,7 +47,7 @@ const RightSider = styled.div`
  
 `;
 const ContentDiv = styled.div`
-
+   width: 70%;
 `;
 class EnterContent extends React.Component {
     constructor(props) {
@@ -80,21 +80,13 @@ class EnterContent extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         const { showModal,loading  } = this.state;
-        const data = [
-            'Racing car sprays burning fuel into crowd.',
-            'Japanese princess to wed commoner.',
-            'Australian walks 100km after outback crash.',
-            'Man charged over missing wedding girl.',
-            'Los Angeles battles huge wildfires.',
-        ];
-        const Data = [
-            <Content name={"Sports"} content={'Racing car sprays burning fuel into crowd.'}></Content>,
-            <Content name={"Sports"} content={'Racing car sprays burning fuel into crowd.'}></Content>,
-            <Content name={"Sports"} content={'Racing car sprays burning fuel into crowd.'}></Content>,
-            <Content name={"Sports"} content={'Racing car sprays burning fuel into crowd.'}></Content>,
-    
+
+        const Data = [];
+        for (let index = 0; index < 6; index++) {
+            Data.push(
+                <Content name={"Sports"} content={'Racing car sprays burning fuel into crowd.'}></Content>
+            )};
         
-        ];
 
         return (
             <Wrapper>
@@ -114,9 +106,11 @@ class EnterContent extends React.Component {
                             style={{
                                 marginLeft: '25px', width: 150,
                                 marginTop: 20, backgroundColor: '#303542',
-                                borderColor: '#303542'
+                                borderColor: '#303542',
+                                height:35
+
                             }} block>ADD CONTENT</Button>
-                        <Modal visible={showModal} onCancel={() => this.handleModal(false)} onOk={this.edit} title="Add Content" width='750px'
+                        <Modal visible={showModal} onCancel={() => this.handleModal(false)} onOk={this.edit} title="Add Content" width='750px' backgroundColor="#303542"
                         footer={[
                             <Button key="back" onClick={this.handleCancel}>
                               Return
@@ -162,11 +156,11 @@ class EnterContent extends React.Component {
                         <Sider
                             style={{
                                 overflow: 'auto',
-                                height: '100vh',
+                                
                                 position: 'relative',
                                 left: 0,
                                 marginTop: 15,
-                                width: '200px'
+                
                             }}
                         >
                             <div className="logo" />
@@ -208,15 +202,7 @@ class EnterContent extends React.Component {
 
                     </RightSider>
                     <ContentDiv>
-                        <List
-                            size="large"
-                            header={<div>Header</div>}
-                            footer={<div>Footer</div>}
-                            bordered
-                            dataSource={Data}
-                            renderItem={item => <List.Item>{item}</List.Item>}
-                            style={{ width: 700 }}
-                        />
+                        {Data}
                     </ContentDiv>
 
 

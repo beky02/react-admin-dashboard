@@ -6,9 +6,10 @@ import styled from 'styled-components';
 import Flex from './Flex';
 
 const HeaderWrapper = styled(Flex)`
-    height: 50px;
+    height: 47px;
     padding: 10px;
     flex-grow: 1;
+   
 `;
 
 const RightHeader = styled(Flex)``;

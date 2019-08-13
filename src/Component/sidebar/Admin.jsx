@@ -29,7 +29,7 @@ class AdminSidebar extends React.Component {
                 </SubMenu>
 
                 <Menu.Item key="9"><Link to='/admin/dashboard'><Icon type="appstore-o"></Icon>Dashboard</Link></Menu.Item>
-                <Menu.Item key="1"><Link to='/admin/sendContet'><Icon type="message"></Icon>Send MT 6096</Link></Menu.Item>
+                <Menu.Item key="1"><Link to='/admin/sendContent'><Icon type="message"></Icon>Send MT 6096</Link></Menu.Item>
                 <Menu.Item key="2"><Link to='/admin/search'><Icon type="search"></Icon>Search</Link></Menu.Item>
                 <Menu.Item key="5"><Link to='/admin/allUsers'><Icon type="user"></Icon>No of users</Link></Menu.Item>
                 <Menu.Item key="6"><Link to='/admin/enterContent'><Icon type="enter"></Icon>Enter Content</Link></Menu.Item>

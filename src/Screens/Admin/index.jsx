@@ -26,7 +26,7 @@ const RightWrapper = styled.div`
 
 const Content = styled(Flex)`
     padding-bottom: 30px;
-    padding-right: 15px;
+
 `;
 
 const NotificationWrapper = styled.div`
@@ -76,6 +76,7 @@ class AdminDashboard extends React.Component {
                             <Route exact path='/admin' component={SendContent} />
                             <Route exact path='/admin/enterContent' component={EnterContent} />
                             <Route exact path='/admin/allUsers' component={AllUser} />
+                            <Route exact path='/admin/sendContent' component={SendContent} />
                             </Switch>
                         </MainWrapper>
                     </Content>

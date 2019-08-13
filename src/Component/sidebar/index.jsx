@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Avatar } from 'antd';
 import AdminSidebar from './Admin';
 import UserSidebar from './User';
+import ImgLogo from '../../Admin/logo.PNG';
+import ImgProfile from '../../Admin/alucard.jpg';
 import moment from 'moment';
 
 import Flex from '../Flex';
@@ -111,7 +113,7 @@ class Sidebar extends React.Component {
                     <Wrapper>
                         <Header>
                             <Logo>
-                                <img style={{ marginLeft: 15, marginTop: 8 }} src="../../../public/logo.PNG"></img>
+                                <img  style={{ marginLeft: 15, marginTop: 8 ,height: 30,width:30}} src={ImgLogo}></img>
                                 <Title>
                                     {(() => {
                                         switch (type) {
@@ -123,7 +125,10 @@ class Sidebar extends React.Component {
                             <Profile>
                                 <StyledH3 style={{ marginLeft: '10px' }}>{"John" + " " + "Doe"}</StyledH3>
                                 <EmailP>kalid@gochanal.com</EmailP>
-                                <Avatar style={{ marginLeft: '23px', marginTop: '29px', width: '70px', height: '70px' }} size="large" />
+                                <Avatar style={{ marginLeft: '23px', marginTop: '29px', width: '70px', height: '70px' }} size="large"  >
+                                <img  style={{ height: 70,width:70}} src={ImgProfile}></img>
+                                </Avatar>
+                                
 
                             </Profile>
                         </Header>
