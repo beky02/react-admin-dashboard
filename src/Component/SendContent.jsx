@@ -2,26 +2,32 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Edit from '../Screens/Admin/EditContent';
 import Delete from '../Screens/Admin/DeleteContent';
+import Send from './SendButton';
 
 
 const Wrapper = styled.div`
     width: 100%;
-    height: 110px;
+    height: 105px;
     :hover {
-		background-color: #EBEBEB;
+		
 		cursor: pointer;
     }
     border-bottom: 1px solid #CECECE;
     border-right: 1px solid #CECECE;
+    border-left: 1px solid #CECECE;
+    border-top: 1px solid #CECECE;
     padding-left: 20px;
     padding-top: 10px;
     padding-right: 20px;
+    margin-top: 10px;
+    border-radius: 6px;
 `;
 const ServiceName = styled.h2`
     color: #303542;
 `;
 const ContentP = styled.p`
     color: #9599A1;
+    width: 85%;
 `;
 const EditDiv = styled.div`
     display: flex;
@@ -54,18 +60,18 @@ class Content extends React.Component {
                 <ServiceName>{this.props.name}</ServiceName>
                 <EditDiv>
                     <ContentP>{this.props.content}</ContentP>
-                    <div style={{ display: "flex", justifyContent: "space-around" }}>
-                        <Edit refresh={this.props.refresh} id={this.props.id}></Edit>
-                        <Delete refresh={this.props.refresh} id={this.props.id}></Delete >
-                    </div>
+                    {
+                        this.state.isHovering &&
+
+                        <div style={{ marginRight: 15, paddingBottom:15}}>
+                            <Send></Send>
+                        </div>
+
+
+                    }
 
                 </EditDiv>
-                {
-                    this.state.isHovering &&
-                    <div>
-                        Hovering right meow! 🐱
-          </div>
-                }
+
 
             </Wrapper>
         );

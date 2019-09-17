@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'antd';
+import axios from 'axios';
 
 
 const { confirm } = Modal;
@@ -14,7 +15,12 @@ class Delete extends React.Component {
             okType: 'danger',
             cancelText: 'No',
             onOk() {
-               
+                axios.delete(`http://localhost:8000/content/delete/${id}`
+                   ).then(response => {
+                    refresh();
+                }).catch(error => {
+                    console.log(error);
+                });
             },
             onCancel() {
                 console.log('on cancel');

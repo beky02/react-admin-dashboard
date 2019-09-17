@@ -6,9 +6,11 @@ import styled from 'styled-components';
 import Flex from './Flex';
 
 const HeaderWrapper = styled(Flex)`
-    height: 47px;
+    height: 60px;
     padding: 10px;
     flex-grow: 1;
+    z-index: 1;
+    box-shadow: 0 8px 6px -6px black;;
    
 `;
 
@@ -32,17 +34,7 @@ class Header extends React.Component {
         return(
             <HeaderWrapper justifyContent="space-between" alignItems="center">
                 <Icon onClick={toggleSidebar} style={{ cursor: 'hand' ,fontSize: '20px' }} type="menu" />
-                <RightHeader alignItems="center">
-                    <NotificationWrapper>
-                        <Badge count="9">
-                            <Icon style={{ fontSize: '20px' }} type="notification" />
-                        </Badge>
-                    </NotificationWrapper>
-                    <Icon style={{ marginRight: '5px', fontSize: '20px' }} type="user" />
-                    <Dropdown overlay={menu}>
-                        <span> {this.props.name} <Icon style={{ fontSize: '15px' }} type="down" /></span>
-                    </Dropdown>
-                </RightHeader>
+                
             </HeaderWrapper>
         );
     }

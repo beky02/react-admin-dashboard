@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon, Form, Input, Button, Select } from 'antd';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUnlock } from "@fortawesome/free-solid-svg-icons";
 
 import Flex from '../Component/Flex';
 
@@ -12,29 +14,39 @@ const Option = Select.Option;
 
 const Wrapper = styled(Flex)`
     height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 300px;
 `;
+const Row = styled(Flex)``;
 
 const Modal = styled.div`
     box-shadow: 0 1px 3px #ccc;
-    width: 500px;
+    width: 370px;
     border-radius: 10px;
+    position: absolute;
+    margin-top: 125px;
+    z-index: 1;
+    background: white;
+    margin-left: 200px;
  
 `;
 
 const Header = styled(Flex)`
     height: 70px;
-    background-color: #189EFF;
+    background-color: white;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    margin-bottom: 15px;
-    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
     height: 100px;
+    flex-direction: column;
 `;
 
 const H2 = styled.h2`
-    color: white;
+    color: #3C4252;
     margin-bottom: 0px;
-    margin-top: 27px;
+    margin-top: 5px;
     font-size: 30px;
 `;
 
@@ -42,6 +54,44 @@ const MySelect = styled(Select)`
     margin-bottom: 20px;
     width: 100%;
 `;
+
+const Circle = styled.div`
+    background: ${props => props.color};
+    animation: floating ${props => props.time} infinite;
+    height: 300px;
+    width: 300px;
+    border-radius: 150px;
+    postion: relative;
+
+    @keyframes floating {
+        from {
+            transform: rotate(0deg) translate(-10px) rotate(0deg);
+        }
+    
+        to {
+            transform: rotate(360deg) translate(-10px) rotate(-360deg);
+        }
+    }
+`;
+const SmallCircle = styled.div`
+    background: ${props => props.color};;
+    animation: floating ${props => props.time} infinite;
+    height: 30px;
+    width: 30px;
+    border-radius: 150px;
+    postion: relative;
+
+    @keyframes floating {
+        from {
+            transform: rotate(0deg) translate(-10px) rotate(0deg);
+        }
+    
+        to {
+            transform: rotate(360deg) translate(-10px) rotate(-360deg);
+        }
+    }
+`;
+
 
 class AdminLogin extends React.Component {
 
@@ -63,9 +113,9 @@ class AdminLogin extends React.Component {
 
     login = () => {
         let roles = '';
-        let { email, password,role } = this.state;
+        let { email, password, role } = this.state;
         roles = role;
-       
+
         // console.log("role "+role);
         // axios.post(`http://localhost:9000/${role}/login`,
         //     { email, password }
@@ -75,7 +125,7 @@ class AdminLogin extends React.Component {
         //     localStorage.setItem('last', response.data.user.lastname );
         //     console.log(response.data.user.firstname)
         //     console.log( `user`+ " " + localStorage.getItem(`user`));
-            this.props.history.push(`/${role}`);
+        this.props.history.push(`/${role}`);
         //     // console.log("user get "+reactLocalStorage.getObject('user').firstname);
         // }).catch(error => {
         //     console.log(error);
@@ -86,20 +136,31 @@ class AdminLogin extends React.Component {
         const { role } = this.state;
         const { getFieldDecorator } = this.props.form;
         return (
-            <Wrapper justifyContent="center" alignItems="center">
+            <Wrapper>
+
+                <Row style={{ marginLeft: 400 }}>
+                    <Circle color="#FF7F00" time="9s"></Circle>
+                    <SmallCircle color="#303030" time="7s" style={{ marginTop: 280 }}></SmallCircle>
+                </Row>
                 <Modal>
-                <Header><H2>Sign In</H2></Header>
-                    <Form onSubmit={this.handleSubmit} className="login-form" style={{ height: 400, width: 350 ,    marginLeft: '77px'}}>
-                
+                    <Header>
+
+                        <FontAwesomeIcon icon={faUnlock} size="3x" color='#FF7F00' />
+                        <H2>Login</H2>
+                    </Header>
+
+                    <Form onSubmit={this.handleSubmit} className="login-form" style={{ height: 220, width: 320, marginLeft: '25px' }}>
+
                         <Form.Item>
                             <MySelect
                                 onChange={this.handleSelectChange}
                                 showSearch
                                 placeholder="Select a role"
+
                             >
                                 <Option value="admin">Admin</Option>
                                 <Option value="user">User</Option>
-                                
+
                             </MySelect>
                         </Form.Item>
                         <Form.Item>
@@ -107,9 +168,9 @@ class AdminLogin extends React.Component {
                                 rules: [{ required: true, message: 'Please input your Email!' }],
                             })(
                                 <Input
-                                    prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)', }} />}
+                                    prefix={<Icon type="mail" style={{ color: '#3C4252', }} />}
                                     placeholder="Email"
-                                    style={{ height: 38 }}
+                                    style={{ height: 42, color: '#3C4252' }}
                                     onChange={(e) => this.handleInputchange('email', e.target.value)}
 
                                 />,
@@ -120,26 +181,34 @@ class AdminLogin extends React.Component {
                                 rules: [{ required: true, message: 'Please input your Password!' }],
                             })(
                                 <Input.Password
-                                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    prefix={<Icon type="lock" style={{ color: '#3C4252' }} />}
                                     type="password"
                                     placeholder="Password"
-                                    style={{ height: 38 }}
+                                    style={{ height: 42 }}
                                     onChange={(e) => this.handleInputchange('password', e.target.value)}
                                 />,
                             )}
                         </Form.Item>
-                        <Form.Item style={{ float: 'right', paddingRight: 5 }}>
-                            <a className="login-form-forgot" href="/register">
-                                Forgot password?</a>
-                        </Form.Item>
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit" className="login-form-button"
-                                style={{ width: 350 }}
-                                onClick={this.login}>
-                                Log in</Button>
-                        </Form.Item>
+
                     </Form>
+                    <Row style={{ flexDirection:'column',marginLeft:80,marginBottom:30 }}>
+                        <Button type="primary" htmlType="submit" className="login-form-button"
+                            style={{ width: 200, height: 36, backgroundColor: '#3C4252', borderColor: '#3C4252', fontSize: 17, }}
+                            onClick={this.login}>
+                            Log in</Button>
+                        <a className="login-form-forgot" href="/register" style={{marginTop:15,marginLeft:45}}>
+                            Forgot password?</a>
+
+                    </Row>
+
                 </Modal>
+                <Row>
+                    <SmallCircle color="#303030" time="9s"></SmallCircle>
+                    <Circle color="#3C4252" time="7s"></Circle>
+                </Row>
+
+
+
             </Wrapper>
         );
     }

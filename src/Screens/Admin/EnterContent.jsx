@@ -5,6 +5,7 @@ import Flex from '../../Component/Flex';
 import Content from '../../Component/Content';
 import Edit from './EditContent';
 
+
 import {
     Form,
     Input,
@@ -27,7 +28,7 @@ const Wrapper = styled.div`
     width: 100%;
 `;
 const Headers = styled.div`
-    background-color: #303542;
+    background-color: #3C4252;
     height: 24%;
     display: flex;
     justify-content: space-around;
@@ -55,8 +56,14 @@ class EnterContent extends React.Component {
         this.state = {
             showModal: false,
             loading: false,
+            Content:{},
+            allContent:{}
         }
     }
+
+    componentDidMount() {
+        this.getContents();
+      }
 
     handleModal = showModal => {
         this.setState({ showModal });
@@ -64,14 +71,58 @@ class EnterContent extends React.Component {
 
     handleInputchange = (key, value) => {
         this.setState({
-            [key]: value
-        })
+            Content: {  ...this.state.Content, [key]: value }
+        });
     };
+
+    getContents = () => {
+        axios.get('http://localhost:8000/content/all')
+        .then(response => {
+    
+          this.setState({
+            allContent: response.data.content
+          });
+          // console.log("all drugs")
+          console.log(this.state.allContent);
+    
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+    refresh = () => this.getContents();
+
+    add= ()=>{
+        const {keyword,content} = this.state.Content;
+       
+        axios.post('http://localhost:8000/content/add',
+            { keyword,content }
+        ).then(response => {
+            // this.props.history.push('/admin');
+            // console.log("user get "+reactLocalStorage.getObject('user').firstname);
+            notification['success']({
+                message: 'Content created',
+                description: `Content created successfully` 
+
+            });
+            this.getContents();
+
+        }).catch(error => {
+            // console.log(error);
+            notification['error']({
+                message: 'Error creating Content',
+                description: `Please fill all required input properly`
+            });
+        })
+    }
     handleOk = () => {
         this.setState({ loading: true });
         setTimeout(() => {
           this.setState({ loading: false, showModal: false });
+          this.add();
         }, 3000);
+        
+
       };
     
       handleCancel = () => {
@@ -82,9 +133,9 @@ class EnterContent extends React.Component {
         const { showModal,loading  } = this.state;
 
         const Data = [];
-        for (let index = 0; index < 6; index++) {
+        for (let index = 0; index < this.state.allContent.length; index++) {
             Data.push(
-                <Content name={"Sports"} content={'Racing car sprays burning fuel into crowd.'}></Content>
+                <Content name={"Sports"} content={this.state.allContent[index].content}  refresh={this.refresh} id={this.state.allContent[index]._id}></Content>
             )};
         
 
@@ -127,15 +178,20 @@ class EnterContent extends React.Component {
                                     })(
                                         <Select
                                             placeholder="Select a service group"
-                                            onChange={(e) => this.handleInputchange('location', e)}
+                                            onChange={(e) => this.handleInputchange('keyword', e)}
                                             style={{ width: 355, marginLeft: 20 }}
                                         >
-                                            <Option value="4 kilo">4 Kilo</Option>
-                                            <Option value="5 kilo">5 Kilo</Option>
-                                            <Option value="bole">Bole</Option>
-                                            <Option value="megenagna">Megenagna</Option>
-                                            <Option value="piassa">Piassa</Option>
+                                            <Option value="1">GO SPORT</Option>
+                                            <Option value="2">GO JOKES</Option>
+                                            <Option value="3">GO KNOWLEDGE</Option>
+                                            <Option value="A1">SPORT AM</Option>
+                                            <Option value="A2">JOKES AM</Option>
+                                            <Option value="A3">KNOWLEDGE</Option>
+                                            <Option value="5">OROMO JOKES</Option>
+                                            <Option value="6">OROMO SPORT</Option>
+                                            <Option value="10">NATURAL BEAUTY TIPS</Option>
                                         </Select>,
+                                       
                                     )}
                                 </Form.Item>
                                 <Form.Item >
