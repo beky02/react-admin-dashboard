@@ -13,7 +13,7 @@ const Wrapper = styled(Flex)`
 `;
 const Content = styled.div`
     height: 350px;
-    background-color: #303542;
+    background-color: #363640;
     
 `;
 const Title = styled.h1` 

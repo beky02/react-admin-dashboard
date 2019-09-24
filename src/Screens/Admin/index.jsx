@@ -14,7 +14,8 @@ import Profile from './Profile';
 import ImgLogo from '../../Admin/logoo.png';
 import { Menu, Dropdown, Icon, Badge, Avatar, Input, Tooltip, Drawer, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle, faCog, faSignOutAlt, faSearch, faTimesCircle,faBars } from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle, faCog, faSignOutAlt, faSearch, faTimesCircle,faBars,faListUl } from "@fortawesome/free-solid-svg-icons";
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 const { Search } = Input;
 const Wrapper = styled(Flex)`
@@ -47,6 +48,7 @@ const Logo = styled(Flex)`
    position: fixed;
    z-index: 100;
    width: 100%;
+   box-shadow: 3px 0px 5px -3px black;
 
 `;
 
@@ -81,7 +83,8 @@ const DropdownComp = styled(Dropdown)`
 
 `;
 const IconFont = styled(FontAwesomeIcon)`
-cursor: pointer
+    cursor: pointer;
+    height: 24px;
 `;
 const LinkComp = styled(Link)`
    margin-top: 6px;
@@ -144,6 +147,7 @@ class AdminDashboard extends React.Component {
         });
     }
     render() {
+        let User =reactLocalStorage.getObject('account');
         const onChange = e => {
             console.log(e);
         };
@@ -175,7 +179,7 @@ class AdminDashboard extends React.Component {
                         <img style={{ marginRight: '14px', height: 60, width: 60 }} src={ImgLogo} onClick></img>
                         <Title>Go Chanal</Title>
                         <IconFont icon={faBars} onClick={this.toggleSidebar} color= 'white'
-                        style={{marginLeft:40, marginTop: 15}} size='2x'></IconFont>
+                        style={{marginLeft:40, marginTop: 15}} ></IconFont>
                         
                         {showSearch &&
                         <InputStyled allowClear placeholder="Search . . . " a onChange={(e) => {
@@ -223,12 +227,12 @@ class AdminDashboard extends React.Component {
                         <DropdownComp overlay={menu} >
                             <Row style={{ alignItems: "center" }}>
                                 <Avatar style={{ marginLeft: '5px', marginRight: 10 }} size="large" />
-                                <p style={{ color: 'white', marginRight: 10, textAlign: 'center', textTransform: 'capitalize', marginTop: 12, fontSize: 16 }}>kalid</p>
+                                <p style={{ color: 'white', marginRight: 10, textAlign: 'center', textTransform: 'capitalize', marginTop: 12, fontSize: 16 }}>{User.firstname}</p>
 
                             </Row>
 
                         </DropdownComp>
-                        <IconFont icon={faBars} onClick={this.showDrawer} color= 'white'
+                        <IconFont icon={faListUl} onClick={this.showDrawer} color= 'white'
                         style={{marginLeft:15}} size='2x'></IconFont>
                        
                     </Row>

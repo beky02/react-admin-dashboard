@@ -5,6 +5,8 @@ import { Bar, Pie } from 'react-chartjs-2';
 import { Card, Progress, Result } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from "@fortawesome/free-solid-svg-icons";
+import err from '../../Admin/message_error.png';
+import sent from '../../Admin/message_sent.png'
 
 
 
@@ -18,6 +20,16 @@ const Row = styled.div`
     height: 140px;
     margin-bottom: 10px;
 `;
+const Image = styled.img`
+    height: 50px;
+    width: 50px
+`
+const P = styled.p`
+    color: #363640;
+    font-size: 15px;
+    width: 50px;
+    font-weight: bold;
+`
 
 
 
@@ -50,6 +62,10 @@ class Dashboard extends React.Component {
                 <Card hoverable
 
                     bordered={false} style={{ width: 240, marginRight: 25 }}>
+                    <div style={{display: 'flex',height: 70,justifyContent: 'space-between',paddingRight:30}}>
+                        <Image src={sent} ></Image>
+                        <P>Delivered Message</P>
+                    </div>
 
                     <Progress
                         strokeColor={{
@@ -64,6 +80,9 @@ class Dashboard extends React.Component {
                     width: 240,
                     marginRight: 25
                 }}>
+                    <div style={{display: 'flex',height: 70,justifyContent: 'space-between',paddingRight:30}}>
+                        <Image src={sent} ></Image>
+                    </div>
 
                     <Progress
                         percent={79.9}
@@ -75,6 +94,11 @@ class Dashboard extends React.Component {
                     width: 240,
                     marginRight: 25
                 }}>
+                    <div style={{display: 'flex',height: 70,justifyContent: 'space-between',paddingRight:30}}>
+                        <Image src={err} ></Image>
+                        <P>Error Message</P>
+                    </div>
+
                     <Progress percent={70} status="exception" />
 
                 </Card>

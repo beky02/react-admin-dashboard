@@ -4,7 +4,7 @@ import { Icon, Form, Input, Button, Select } from 'antd';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUnlock } from "@fortawesome/free-solid-svg-icons";
-
+import {reactLocalStorage} from 'reactjs-localstorage';
 import Flex from '../Component/Flex';
 
 
@@ -116,20 +116,18 @@ class AdminLogin extends React.Component {
         let { email, password, role } = this.state;
         roles = role;
 
-        // console.log("role "+role);
-        // axios.post(`http://localhost:9000/${role}/login`,
-        //     { email, password }
-        // ).then(response => {
-        //     localStorage.setItem(`${roles}`, response.data.token);
-        //     localStorage.setItem('first', response.data.user.firstname );
-        //     localStorage.setItem('last', response.data.user.lastname );
-        //     console.log(response.data.user.firstname)
-        //     console.log( `user`+ " " + localStorage.getItem(`user`));
-        this.props.history.push(`/${role}`);
-        //     // console.log("user get "+reactLocalStorage.getObject('user').firstname);
-        // }).catch(error => {
-        //     console.log(error);
-        // })
+        console.log("role "+role);
+        axios.post(`http://localhost:8000/${role}/login`,
+            { email, password }
+        ).then(response => {
+            localStorage.setItem(`${roles}`, response.data.token);
+            reactLocalStorage.setObject('account', response.data.user);
+            console.log(response.data.user);
+            this.props.history.push(`/${role}`);
+            
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
     render() {

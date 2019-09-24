@@ -76,7 +76,7 @@ class View extends React.Component {
                 }
             });
         return (<>
-           <Button type="link" onClick={this.showModal}>View</Button>
+           <Button type="link"  onClick={this.showModal}>View</Button>
            <Modal
                     title="Full Infromation of Content"
                     visible={this.state.visible}

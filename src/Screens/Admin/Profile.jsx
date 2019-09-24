@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Progress, Button, Input, Form } from 'antd';
-import Flex from '../../Component/Flex'
+import Flex from '../../Component/Flex';
+import {reactLocalStorage} from 'reactjs-localstorage';
+import moment from 'moment';
 
 
 const Wrapper = styled(Flex)`
@@ -26,7 +28,25 @@ const StyledButton = styled(Button)`
     
 `;
 
+
 class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        
+        };
+    }
+    componentDidMount(){
+        let User =reactLocalStorage.getObject('account');
+        this.props.form.setFieldsValue({
+            'title': "GO VAS",
+            'email': User.email,
+            'firstname': User.firstname,
+            'lastname': User.lastname,
+            'dateofbirth':moment(User.dateOfBirth).format('ll') ,
+            'phone': User.phone
+        })
+    }
 
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -54,40 +74,40 @@ class Profile extends React.Component {
 
                     <Form layout="vertical" >
                         <Row>
-                            <Item label="COMPANY" >
+                            <Item label="COMPANY( NAME)" >
                                 {getFieldDecorator('title', {
                                     rules: [{ required: true, message: 'Please input the title of collection!' }],
                                 })(<Input disabled />)}
                             </Item>
                             <Item label="EMAIL">
-                                {getFieldDecorator('title', {
-                                    rules: [{ required: true, message: 'Please input the title of collection!' }],
+                                {getFieldDecorator('email', {
+                                    rules: [{ required: true, message: 'Please input the Email !' }],
                                 })(<Input />)}
                             </Item>
                         </Row>
                         <Row>
                             <Item label="FIRST NAME" >
-                                {getFieldDecorator('title', {
-                                    rules: [{ required: true, message: 'Please input the title of collection!' }],
+                                {getFieldDecorator('firstname', {
+                                    rules: [{ required: true, message: 'Please input the First Name !' }],
                                 })(<Input />)}
                             </Item>
                             <Item label="LAST NAME">
-                                {getFieldDecorator('title', {
-                                    rules: [{ required: true, message: 'Please input the title of collection!' }],
+                                {getFieldDecorator('lastname', {
+                                    rules: [{ required: true, message: 'Please input the Last Name !' }],
                                 })(<Input />)}
                             </Item>
                         </Row>
                         <Row>
                             <Item label="DATE OF BIRTH">
-                                {getFieldDecorator('title', {
-                                    rules: [{ required: true, message: 'Please input the title of collection!' }],
+                                {getFieldDecorator('dateofbirth', {
+                                    rules: [{ required: true, message: 'Please input the Date of Birth !' }],
                                 })(<Input />)}
                             </Item>
 
                             <Item label="PHONE NUMBER">
-                                {getFieldDecorator('title', {
-                                    rules: [{ required: true, message: 'Please input the title of collection!' }],
-                                })(<Input />)}
+                                {getFieldDecorator('phone', {
+                                    rules: [{ required: true, message: 'Please input the Phone Number !' }],
+                                })(<Input type="number" />)}
                             </Item>
 
                         </Row>

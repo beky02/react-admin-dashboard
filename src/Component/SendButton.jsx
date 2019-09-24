@@ -12,8 +12,9 @@ const ButtonCustom = styled(Button)`
   margin-top: -20px;
   
   
+  
   &:hover {
-    background: #4384F6;
+    background: orange;
     border: 2px solid #4384F6;
     font-size: 17px;
     box-shadow: 0 8px 45px rgba(53, 152, 212, 0.9);
@@ -83,10 +84,13 @@ class SendButton extends React.Component {
                  status
                  ?  
                  <ButtonCustom size="small" type="primary"
+                
 
                  style={{
                      width: 100,
                      height: 35,
+                     backgroundColor: 'orange',
+                     borderColor: 'orange'
                  
                  }}
                  block
